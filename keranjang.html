@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTS</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .cart-item { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Keranjang Belanja</h1>
+    <div id="cartItems"></div>
+    <button onclick="checkout()">Checkout</button>
+    <a href="produk.html">Kembali ke Produk</a>
+
+    <script>
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItemsDiv = document.getElementById('cartItems');
+            cartItemsDiv.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <p>${item}</p>
+                        <button onclick="removeFromCart(${index})">Hapus</button>
+                    </div>
+                `;
+            });
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function checkout() {
+            window.location.href = 'checkout.html';
+        }
+
+        loadCart();
+    </script>
+</body>
+</html>

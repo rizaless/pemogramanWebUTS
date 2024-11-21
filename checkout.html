@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Checkout</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+    </style>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div id="checkoutItems"></div>
+    <h2>Total Pembayaran: <span id="totalPrice"></span></h2>
+    <button onclick="processPayment()">Bayar</button>
+    <a href="keranjang.html">Kembali ke Keranjang</a>
+
+    <script>
+        function loadCheckout() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let checkoutItemsDiv = document.getElementById('checkoutItems');
+            checkoutItemsDiv.innerHTML = '';
+
+            cart.forEach(item => {
+                checkoutItemsDiv.innerHTML += `<p>${item}</p>`;
+            });
+
+            // Misalnya, setiap produk memiliki harga 100.000
+            let totalPrice = cart.length * 100
